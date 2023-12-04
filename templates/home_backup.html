@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+
+{% comment %} <div class="nav-left">
+  {% if user.is_authenticated %}
+    <p>Hi {{ user.username }}!</p>
+    <div class="nav-right">
+        <a href="{% url 'job_new' %}">+ New Job Post</a>
+    </div>
+    <p><a href="{% url 'logout' %}">Log Out</a></p>
+  {% else %}
+    <p>You are not logged in</p>
+    <a href="{% url 'login' %}">Log In</a> |
+    <a href="{% url 'signup' %}">Sign Up</a>
+  {% endif %}
+</div> {% endcomment %}
+
+<!-- Jobs Start -->
+<div class="container-xxl py-5">
+  <div class="container">
+      <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Job Listing</h1>
+  </div>
+{% for job in jobposting_list %}
+<div class="container">
+  <div class="tab-content">
+    <div id="tab-1" class="tab-pane fade show p-0 active">
+      <div class="job-item p-4 mb-4 border">
+        <div class="row g-4">
+          <div class="col-sm-12 col-md-8 d-flex align-items-center">
+            <div class="text-start ps-4 ">
+                <h5 class="mb-3"><a href="{% url 'job_detail' job.pk %}">{{ job.job_title }}</a></h5>
+                <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>Location: {{ job.location }}</span>
+                <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>Salary: {{ job.salary }} per hour</span>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+            <div class="d-flex mb-3">
+                <a class="btn btn-primary" href="{% url 'job_detail' job.pk %}">View Details</a>
+            </div>
+            <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i><b>Start Date:</b> {{ job.start_Date }}</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  {% endfor %}
+</div>
+{% endblock content %}

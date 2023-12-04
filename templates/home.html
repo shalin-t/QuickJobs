@@ -1,0 +1,71 @@
+{% extends "base.html" %} {% block content %} {% if not user.is_authenticated %}
+{% include "components/prelogin.html" %} {% else %} {% comment %}
+<div>{% include "components/carousel.html" %}</div>
+{% endcomment %} {% comment %} {% for job in jobposting_list %}
+<div class="all-jobs">
+  <h2><a href="{% url 'job_detail' job.pk %}">{{ job.job_title }}</a></h2>
+</div>
+{% endfor %} {% endcomment %}
+
+<div class="container py-2 .bg-light.bg-gradient">
+  <div class="row">
+    <!-- Sidebar -->
+    <div class="col-3">{% include "components/sidebar.html" %}</div>
+    <!-- End of Sidebar -->
+    <div class="col-1"></div>
+    <div class="col-8">
+      <!-- Jobs list -->
+      <h1 class="text-center mb-5 wow fadeInUp text-primary" data-wow-delay="0.1s">
+        <b>Jobs List</b>
+      </h1>
+      {% for job in jobposting_list %}
+      <div class="container">
+        <div class="tab-content">
+          <div id="tab-1" class="tab-pane fade show p-0 active">
+            <div class="job-item p-4 mb-4 border">
+              <div class="row g-4">
+                <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                  <div class="text-start ps-4">
+                    <h5 class="mb-3">
+                      <a href="{% url 'job_detail' job.pk %}"
+                        >{{ job.job_title }}</a
+                      >
+                    </h5>
+                    <span class="text-truncate me-3"
+                      ><i class="fa fa-map-marker-alt text-primary me-2"></i
+                      ><b>Location:</b> {{ job.location }}</span
+                    ><br>
+                    <span class="text-truncate me-0"
+                      ><i class="far fa-money-bill-alt text-primary me-2"></i
+                      ><b>Salary:</b> ${{ job.salary }}/hr</span
+                    >
+                  </div>
+                </div>
+                <div
+                  class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center"
+                >
+                  <div class="d-flex mb-3">
+                    <a
+                      class="btn btn-primary"
+                      href="{% url 'job_detail' job.pk %}"
+                      >View Details</a
+                    >
+                  </div>
+                  <small class="text-truncate"
+                    ><i class="far fa-calendar-alt text-primary me-2"></i
+                    ><b>Start Date:</b> {{ job.start_Date }}</small
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  {% endif %} 
+  </div>
+ <!-- End of Jobs list -->
+  {% endblock content %}

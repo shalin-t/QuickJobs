@@ -1,0 +1,31 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-3">{% include "components/sidebar.html" %}</div>
+
+    <div class="col-1"></div>
+    <div class="col-8">
+      <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">
+        List of Candidates
+      </h1>
+      <table class="table table-responsive table-hover">
+        <thead class="">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">email</th>
+          </tr>
+        </thead>
+        <tbody class="">
+          {% for user in customuser_list %}
+          <tr>
+            <th scope="row">{{user.id}}</th>
+            <td>{{user.email}}</td>
+          </tr>
+        </tbody>
+        {% endfor %}
+      </table>
+    </div>
+    {% endblock content %}
+  </div>
+</div>

@@ -1,0 +1,53 @@
+{% extends "base.html" %} {% load crispy_forms_tags %} {% block title %}Log In{%
+endblock title %} {% block content %}
+
+<!-- <form method="post">
+  {% csrf_token %} {{ form|crispy }}
+  <button type="submit">Log In</button>
+</form> -->
+<div class="container text-left">
+  <div class="row">
+    <div class="col"></div>
+
+    <div class="col-5 mb-3">
+      <h2>Log In</h2>
+      <form method="post">
+        {% csrf_token %} {{ form|crispy }}
+        <button type="submit" class="btn btn-primary">Log In</button>
+      </form>
+    </div>
+
+    <div class="col"></div>
+  </div>
+</div>
+
+<div class="container clearfix">
+  <div class="form login">
+    <h2>Log In</h2>
+    {% comment %}
+    <form>
+      <p>
+        <label>Username or email address<span>*</span></label>
+        <input type="email" required />
+      </p>
+      <p>
+        <label>Password<span>*</span></label>
+        <input type="password" required />
+      </p>
+      <p>
+        <label>
+          <a href="pass-reset.html">Forgot password?</a>
+          <a href="registration.html">Create an account</a>
+        </label>
+        <input type="submit" value="Login" />
+      </p>
+    </form>
+    {% endcomment %}
+    <form method="post">
+      {% csrf_token %} {{ form|crispy }}
+      <button type="submit" class="btn btn-primary">Log In</button>
+    </form>
+  </div>
+</div>
+
+{% endblock content %}

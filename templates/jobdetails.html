@@ -1,0 +1,106 @@
+{% extends "base.html" %} {% block content %} {% comment %} ######## For
+Employer
+<div>
+  {% if user.is_authenticated %}
+  <a href="{% url 'job_edit' jobposting.pk %}">+ Edit Job Post</a>
+  <p><a href="{% url 'job_delete' jobposting.pk %}">+ Delete Job Post</a></p>
+  {% endif %}
+</div>
+{% endcomment %}
+<!-- Alerts --->
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <a href="javascript:history.back()" class="breadcrumb-item active back-link link-primary" aria-current="page">Back</a>
+</div>
+  </ol>
+</nav>
+<div
+  id="applyAlert"
+  class="alert alert-success alert-dismissible fade show"
+  role="alert"
+  style="display: none"
+>
+  <strong>Success!</strong> Your job application has been sent for review.
+  below.
+  <button type="button" class="close" onclick="hideAlert()" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div
+  id="saveAlert"
+  class="alert alert-success alert-dismissible fade show"
+  role="alert"
+  style="display: none"
+>
+  <strong>Success!</strong> Your job application has been saved.
+  <button type="button" class="close" onclick="hideAlert()" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<!-- End of Alert --->
+<div class="container text-left">
+  <div class="row">
+    <div class="col"></div>
+    <div class="col-8 mb-3">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title"><b>Job Details</b></h4>
+          <h3 class="card-subtitle mb-2 text-body-secondary text-primary">
+            <b>{{jobposting.job_title}}</b>
+          </h3>
+          <p class="card-text">
+            Job Description: {{jobposting.job_description}}
+          </p>
+          <p class="card-text">End Date: {{jobposting.end_Date}}</p>
+          <p class="card-text">Pay per hour: ${{jobposting.salary}}</p>
+          <p class="card-text">Location: {{jobposting.location}}</p>
+
+          <!--Google map-->
+          <div
+            id="map-container-google-1"
+            class="z-depth-1-half map-container"
+            style="">
+            <iframe
+              src="https://maps.google.com/maps?q=manhatan&t=&z=13&ie=UTF8&iwloc=&output=embed"
+              frameborder="0"
+              style="border: 0"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <!--Google Maps-->
+
+          <button type="button" class="btn btn-primary" onclick="showAlert()">
+            Apply
+          </button>
+
+          <button
+            type="button"
+            class="btn btn-outline-primary me-2"
+            onclick="saveJobApplication()"
+          >
+            Save Job Application
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col"></div>
+  </div>
+</div>
+
+<!-- JavaScript -->
+<script>
+  function showAlert() {
+    document.getElementById("applyAlert").style.display = "block";
+  }
+
+  function hideAlert() {
+    document.getElementById("applyAlert").style.display = "none";
+  }
+
+  function saveJobApplication() {
+    document.getElementById("saveAlert").style.display = "block";
+    setTimeout(hideAlert, 3000); // Hides the alert after 3 seconds (3000 milliseconds)
+  }
+</script>
+
+{% endblock content %}
